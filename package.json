@@ -1,0 +1,22 @@
+{
+    "name": "journeyedu-wksp-template",
+    "version": "0.5.0",
+    "description": "Basic environment used to build the workshops for the Node.Js Module",
+    "main": "server.js",
+    "scripts": {
+        "build:scss": "node-sass ./scss/ -o ./public/css/",
+        "watch:scss": "yarn build:scss && node-sass -w -r ./scss/ -o ./public/css/",
+        "start": "yarn build:scss && node server.js",
+        "dev": "concurrently \"nodemon -e js,ejs server.js\" \"yarn watch:scss\""
+    },
+    "author": "Scott Morin <scott@journeyedu.co>",
+    "license": "MIT",
+    "dependencies": {
+        "concurrently": "^5.1.0",
+        "ejs": "^3.0.1",
+        "express": "^4.17.1",
+        "morgan": "^1.9.1",
+        "node-sass": "^4.13.1",
+        "nodemon": "^2.0.2"
+    }
+}
