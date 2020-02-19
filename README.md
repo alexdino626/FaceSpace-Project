@@ -120,14 +120,8 @@ app.get('*', handleFourOhFour);
 
 ## Screenshots
 
-### Signin Page
+<img src='./public/images/ff_signin.png' style='float:left; width: 30%; margin: 0 24px 0 0;' />
 
-<img src='./public/images/ff_signin.png' style='float:left; margin: 0 24px 0 0;' />
+<img src='./public/images/ff_home.png' style='float:left; width: 30%; margin: 0 24px 0 0;' />
 
-### Homepage
-
-<img src='./public/images/ff_home.png' style='float:left; margin: 0 24px 0 0;' />
-
-### My Friend's Page
-
-<img src='./public/images/ff_friendpage.png' style='float:left; margin: 0 24px 0 0;' />
+<img src='./public/images/ff_friend-page.png' style='float:left; width: 30%; margin: 0 24px 0 0;' />
