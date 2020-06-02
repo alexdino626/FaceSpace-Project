@@ -1,7 +1,5 @@
 # Facespace!
 
-## What is Facespace?
-
 ## Goal
 
 To create a site that will serve up Facespace! Oh, and learn a little more about Node, routing, EJS, and CSS along the way.
@@ -23,12 +21,6 @@ To create a site that will serve up Facespace! Oh, and learn a little more about
 - Adding/reomving a friend should also update the friend's page. \_It may look like that is happening already but don't be fooled. It ain't!
 - Ability reorder your Friends (upvote/downvote?)
 
-## Limitations
-
-### Data Persistence
-
-Because we don't have and form of data storage, we cannot persist changes when the server reloads. 🤔
-
 ---
 
 ## Setup
@@ -40,17 +32,17 @@ Because we don't have and form of data storage, we cannot persist changes when t
 
 You will be creating the following endpoints.
 
-| Endpoint    | Description                                                           |
-| ----------- | --------------------------------------------------------------------- |
-| `/`         | home/main page                                                        |
-| `/signin`   | signin page                                                           |
-| `/user/:id` | user page                                                             |
+| Endpoint    | Description                                                          |
+| ----------- | -------------------------------------------------------------------- |
+| `/`         | home/main page                                                       |
+| `/signin`   | signin page                                                          |
+| `/user/:id` | user page                                                            |
 | `/getname`  | this is the endpoint that will receive the data from the signin form |
-| `*`         | Don't forget to have a 404 page setup as well.                        |
+| `*`         | Don't forget to have a 404 page setup as well.                       |
 
 ### About the Data
 
-There is `/data/users.js` file that contains an array of `user` objects.
+There is a file `/data/users.js` that contains an array of `user`s. Each user looks like this.
 
 ```js
 {
@@ -129,7 +121,12 @@ In `views/pages/`, create a new file called `signin.ejs`. Add the following `<fo
 <div class="signin-page">
   <form method="get" action="/getname" class="signin-page__form">
     <label for="firstName" class="signin-page__form--label">First name</label>
-    <input type="text" name="firstName" placeholder="Your first name" class="signin-page__form--input" />
+    <input
+      type="text"
+      name="firstName"
+      placeholder="Your first name"
+      class="signin-page__form--input"
+    />
     <button type="submit" class="signin-page__form--button">Submit</button>
   </form>
 </div>
@@ -157,35 +154,32 @@ Notice that the form (in `signin.ejs`) has `action` attribute. That is the endpo
 
 ```js
 .get('/getname', handleName)
-````
+```
 
 Notice that the endpoint is calling a new function. We need to define that function above. _You can define it right after the `handleSignin` function._
 
 ```js
-const handleName = (req, res) => {
-
-}
+const handleName = (req, res) => {};
 ```
 
 This type of HTML form sends the data from the form as query parameters in the `req`uest.
 
 1. Define a variable `firstName` and assign the value of `req.query.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
-2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`). 
+2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`).
 3. If it exists assign it to the `currentUser` variable that is defined on line 8, and then redirect to the homepage.
 4. If it doesn't exist, redirect to the signin page.
 
 We can redirect the browser to an endpoint with the following code.
 
 ```js
-res.redirect('/the-endpoint')
+res.redirect('/the-endpoint');
 ```
 
 5. You should also return a status code to the browser.
 
 ```js
-res.status(200) // when the request is successful
-res.status(404) // when the request is not successful. In this case, the user was not found.
+res.status(200); // when the request is successful
+res.status(404); // when the request is not successful. In this case, the user was not found.
 ```
 
 ### Exercise 2 - The Profile Page
-
