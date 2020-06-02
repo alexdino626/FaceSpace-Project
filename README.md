@@ -1,7 +1,5 @@
 # Facespace!
 
-<img src='./public/images/friendface.png' style='float:left; margin: 0 24px 0 0;' />
-
 ## What is Facespace?
 
 ## Goal
@@ -31,9 +29,7 @@ To create a site that will serve up Facespace! Oh, and learn a little more about
 
 Because we don't have and form of data storage, we cannot persist changes when the server reloads. 🤔
 
-### Security
-
-Our security system will be total crap, but will work for our purposes. True site security is too important for us to implement ourselves! When the time comes, we'll leverage code from experts in the field.
+---
 
 ## Setup
 
@@ -42,19 +38,19 @@ Our security system will be total crap, but will work for our purposes. True sit
 
 ### Server Endpoints
 
-Create the following endpoints
+You will be creating the following endpoints.
 
 | Endpoint    | Description                                                           |
 | ----------- | --------------------------------------------------------------------- |
 | `/`         | home/main page                                                        |
 | `/signin`   | signin page                                                           |
 | `/user/:id` | user page                                                             |
-| `/getname`  | this is the endpoint that will receive the data from the signinn form |
+| `/getname`  | this is the endpoint that will receive the data from the signin form |
 | `*`         | Don't forget to have a 404 page setup as well.                        |
 
 ### About the Data
 
-There is `/data/users.js` file that contains an array of `user` objects. Everyone from the class is in there!
+There is `/data/users.js` file that contains an array of `user` objects.
 
 ```js
 {
@@ -65,47 +61,131 @@ There is `/data/users.js` file that contains an array of `user` objects. Everyon
 },
 ```
 
-- Avatars are taken from Slack.
-- `friends` is an array of the `id`s of the people user is currently friends with.
-- In an effort, to start with _good_ data, I have created friendships for all of you. It was random, and purely based on placement in the array. I took groups of 4, or 3 for the last group, and made all of you friends.
+- `friends` is an array of the `id`s of the people that user is currently friends with.
+- In an effort, to start with _good_ data, I have created friendships.
 
-### Notable Methods and Code Snippets
+Enough talk! Let's get started!
 
-These are methods and bits of code that yuo will most likely need.
+---
 
-- `res.redirect()`
-- `array.find()`
+## The Workshop
+
+### Exercise 1- The Sign in page
+
+Our security system will be total crap, but will work for our purposes. True site security is too important for us to implement ourselves! When the time comes, we'll leverage code from experts in the field.
+
+For this workshop, we're going to simply ask for the user's name and if it's in the users array, we'll assume that that is the person that is logging in.
+
+#### 1.1 Create the endpoint
+
+In `server.js` we need to have an endpoint that will receive requests for the signin page. This endpoint will call a function called `handleSignin`.
+
+Here is the server file. Add the `/signin` endpoint and `handleSignin` function.
+
+```diff
+  'use strict';
+
+  const express = require('express');
+  const morgan = require('morgan');
+
+  const { users } = require('./data/users');
+
+  // declare the 404 function
+  const handleFourOhFour = (req, res) => {
+    res.status(404).send("I couldn't find what you're looking for.");
+  };
+
++ const handleSignin = (req, res) => {
++   res.status(200).send('ok');
++ };
+
+  // -----------------------------------------------------
+  // server endpoints
+  express()
+    .use(morgan('dev'))
+    .use(express.static('public'))
+    .use(express.urlencoded({ extended: false }))
+    .set('view engine', 'ejs')
+
+    // endpoints
++  .get('/signin', handleSignin)
+
+    // a catchall endpoint that will send the 404 message.
+    .get('*', handleFourOhFour)
+
+    .listen(8000, () => console.log('Listening on port 8000'));
+```
+
+This will allow us to "see" what is on the signin page... Nothing.
+
+<img src="./__lecture/assets/signin_1.png" />
+
+#### 1.2 Create the form
+
+In `views/pages/`, create a new file called `signin.ejs`. Add the following `<form>` to the file.
 
 ```html
-<form method="get" action="/getname" class="signin-form">
-  <label for="firstName">First name</label>
-  <input type="text" name="firstName" />
-  <button type="submit">Submit</button>
-</form>
+<%- include('../partials/header') %>
+<div class="signin-page">
+  <form method="get" action="/getname" class="signin-page__form">
+    <label for="firstName" class="signin-page__form--label">First name</label>
+    <input type="text" name="firstName" placeholder="Your first name" class="signin-page__form--input" />
+    <button type="submit" class="signin-page__form--button">Submit</button>
+  </form>
+</div>
+<%- include('../partials/footer') %>
 ```
 
-This is the form code. We will soon find out why this is super weird, but it works with the tools that we have at the moment.
+#### 1.3 Render the signin page.
 
-On submission, the value from the input field will be available in `req.query.firstName`.
+The form we've just added doesn't yet render on the `/signin` page. We need to tell `handleSign` to render that particular `ejs` page template.
 
-#### The Road to Cleaner Code.
+```diff
+  const handleSignin = (req, res) => {
+-   res.status(200).send('ok');
++   res.status(200).render('pages/signin');
+  };
+```
 
-Up to now, we've been adding our route functions arguments directly inside get method. That makes for some messy code. It would be better to have our methods be short and easy to ready. For this project, declare your functions in the server file, above all of the route. _Routes should always be at the bottom of the file._
+<img src="./__lecture/assets/signin_2.png" />
 
-##### Example
+#### 1.4 Receive the data from the form
+
+Our form looks good but it doesn't yet do anything. We need the form to send the input to the server.
+
+Notice that the form (in `signin.ejs`) has `action` attribute. That is the endpoint that the form will contact when a user submits the form. Let's create a `GET` endpoint that will receive the data from the form.
 
 ```js
-// declare the function
-const handleFourOhFour = (req, res) => {
-  res.status(404);
-  res.render('pages/fourOhFour', {
-    title: 'I got nothing',
-    path: req.originalUrl,
-  });
-};
+.get('/getname', handleName)
+````
 
-// pass it to the method at the bottom of the file
-app.get('*', handleFourOhFour);
+Notice that the endpoint is calling a new function. We need to define that function above. _You can define it right after the `handleSignin` function._
+
+```js
+const handleName = (req, res) => {
+
+}
 ```
 
-## Screenshots
+This type of HTML form sends the data from the form as query parameters in the `req`uest.
+
+1. Define a variable `firstName` and assign the value of `req.query.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
+2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`). 
+3. If it exists assign it to the `currentUser` variable that is defined on line 8, and then redirect to the homepage.
+4. If it doesn't exist, redirect to the signin page.
+
+We can redirect the browser to an endpoint with the following code.
+
+```js
+res.redirect('/the-endpoint')
+```
+
+5. You should also return a status code to the browser.
+
+```js
+res.status(200) // when the request is successful
+res.status(404) // when the request is not successful. In this case, the user was not found.
+```
+
+### Exercise 2 - The Profile Page
+

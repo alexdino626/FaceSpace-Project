@@ -1,13 +1,18 @@
+/* Importing the Google font for the headings: Teko */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+
 h1,
 h2,
 h3,
 h4 {
   color: #cc5500;
   font-family: 'Teko', sans-serif;
+  line-height: 1em;
 }
 
 h1 {
   font-size: 36px;
+  margin-top: 3px;
 }
 
 h2 {

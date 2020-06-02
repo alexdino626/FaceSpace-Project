@@ -1,0 +1,6 @@
+:root {
+  --primary-color: #cc5500;
+  --accent-bg-color: rgba(204, 85, 0, 0.1);
+  --page-horizontal-padding: 32px;
+  --header-height: 50px;
+}
