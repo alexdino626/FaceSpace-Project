@@ -7,9 +7,21 @@ const { users } = require('./data/users');
 
 let currentUser = {};
 
+// utility function to get the user obj based on a provided value.
+const findUser = (value) => {
+  return users.find((user) => Object.values(user).includes(value)) || null;
+};
+const getFriends = (arr) => {
+  return users.filter((user) => arr.includes(user._id));
+};
+
 // declare the 404 function
 const handleFourOhFour = (req, res) => {
   res.status(404).send("I couldn't find what you're looking for.");
+};
+
+const handleHomepage = (req, res) => {
+  res.status(200).render('pages/homepage', { users: users });
 };
 
 const handleSignin = (req, res) => {
@@ -17,15 +29,25 @@ const handleSignin = (req, res) => {
 };
 
 const handleName = (req, res) => {
-  const firstName = req.query.firstName;
-  const userObj = users.find((user) => user.name === firstName) || null;
+  const name = req.query.firstName;
+  const user = findUser(name);
 
-  if (userObj) {
-    currentUser = userObj;
-    res.redirect('/');
+  if (user) {
+    currentUser = user;
+    res.status(200).redirect(`users/${user._id}`);
   } else {
-    res.redirect('/signin');
+    res.status(404).redirect('/signin');
   }
+};
+
+const handleProfilePage = (req, res) => {
+  const _id = req.params._id;
+  const user = findUser(_id);
+
+  res.status(200).render('pages/profile', {
+    user: user,
+    friends: getFriends(user.friends),
+  });
 };
 
 // -----------------------------------------------------
@@ -37,8 +59,10 @@ express()
   .set('view engine', 'ejs')
 
   // endpoints
+  .get('/', handleHomepage)
   .get('/signin', handleSignin)
   .get('/getname', handleName)
+  .get('/users/:_id', handleProfilePage)
 
   // a catchall endpoint that will send the 404 message.
   .get('*', handleFourOhFour)

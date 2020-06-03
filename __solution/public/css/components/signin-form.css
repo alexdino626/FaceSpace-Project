@@ -1,4 +1,6 @@
 .signin-page {
+  background: url(/images/facespace_bg.jpg) no-repeat center center;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,7 +9,7 @@
 }
 
 .signin-page__form {
-  background: var(--accent-bg-color);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -37,7 +39,7 @@
   border-radius: 3px;
   box-sizing: border-box;
   color: #fff;
-  height: 32px;
+  height: 36px;
   padding: 4px 12px;
   font-size: 18px;
   font-family: Teko;
