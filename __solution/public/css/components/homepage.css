@@ -1,0 +1,41 @@
+.homepage {
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+  padding: 0 var(--page-horizontal-padding);
+}
+.homepage__all {
+  display: flex;
+  flex-wrap: wrap;
+}
+.homepage__all--user {
+  margin: 0 4px;
+  position: relative;
+  overflow: hidden;
+}
+.homepage__all--user img {
+  border: 1px solid var(--primary-color);
+  width: 120px;
+  transition: all ease 400ms;
+}
+.homepage__all--user img:hover {
+  border: 5px solid var(--primary-color);
+}
+
+.ribbon {
+  background: var(--primary-color);
+  position: absolute;
+  text-align: center;
+  transform: rotate(45deg);
+  right: -30px;
+  top: 10px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 0;
+}
+.ribbon span {
+  color: #fff;
+  font-family: Teko;
+  font-size: 11px;
+}

@@ -21,11 +21,17 @@ const handleFourOhFour = (req, res) => {
 };
 
 const handleHomepage = (req, res) => {
-  res.status(200).render('pages/homepage', { users: users });
+  res
+    .status(200)
+    .render('pages/homepage', { currentUser: currentUser, users: users });
 };
 
 const handleSignin = (req, res) => {
-  res.status(200).render('pages/signin');
+  if (currentUser.name) {
+    res.status(307).redirect('/');
+  } else {
+    res.status(200).render('pages/signin', { currentUser: currentUser });
+  }
 };
 
 const handleName = (req, res) => {
@@ -46,6 +52,7 @@ const handleProfilePage = (req, res) => {
 
   res.status(200).render('pages/profile', {
     user: user,
+    currentUser: currentUser,
     friends: getFriends(user.friends),
   });
 };

@@ -268,7 +268,40 @@ We now have a functioning app! 🙌 Let's add more functionality to the make it 
 
 **⚠️ As of now, you are on your own for the CSS of any added functionality.**
 
-#### 4.1
+#### 4.1 - A link to the signin page in the header
+
+We should have a link to the signin page in the header.
+
+<img src="./__lecture/assets/signin_button.png" />
+
+When the user is signed in, the "sign in" link should be replaced by a greeting and the user's name.
+
+This will mean storing the user data in memory, and passing it to `header.ejs`. You can store the current user object in `currentUser` variable that is defined in the `server.js` file. _This will store the current user in the server memory until the server is restarted._
+
+<img src="./__lecture/assets/signin_signedin.png" />
+
+While you're in the header, it would be good to turn the title into a link to the homepage.
+
+**Hint:** Passing data to a page template also makes it accessible all partials included that page.
+
+#### 4.2 Faces on the homepage
+
+- Faces on the homepage should link to that person's profile page.
+- Let's also add a little UX tweak on hover. Give the image some sort of effect on hover.
+
+<img src="./__lecture/assets/home-links.gif" />
+
+### 4.3 My Friends!
+
+When a user is signed in and looking at the homepage, it would be great if there were some visual indication as to who their friends are in the grid of faces. My example is a ribbon on the image, but feel free to do whatever you like.
+
+<img src="./__lecture/assets/homepage_4.png" />
+
+### 4.4 No Signin for you!
+
+If someone is already signed in, they should not be able to see the signin page. Currently, if a user signs in and navigates to http://localhost:8000/signin, they will see the sign in page.
+
+Prevent this from happening.
 
 ---
 
