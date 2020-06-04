@@ -234,8 +234,8 @@ This type of HTML form sends the data from the form as query parameters in the `
 
 1. Define a variable `firstName` and assign the value of `req.query.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
 2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`).
-3. If it exists assign it to the `currentUser` variable that is defined on line 8. _This will be where we track the currentuser of the app_ and then redirect to the homepage.
-4. If it doesn't exist, redirect to the signin page.
+3. If it exists redirect to that user's profile page.
+4. If it doesn't exist, redirect to the signin page. (This is a reload of the signin page.)
 
 We can redirect the browser to an endpoint with the following code.
 
@@ -264,9 +264,11 @@ res.status(404).render('/signin');
 
 ### Exercise 4 Tying all of the pages together.
 
-Rather than redirect to the homepage, like so: `res.status(200).redirect('/');`. Let's write a dynamic endpoint that grabs the user's `_id` and puts it in the endpoint. This endpoint should match the endpoint you just created in 2.1.
+We now have a functioning app! 🙌 Let's add more functionality to the make it better.
 
-At this point, we have a working signin page that will redirect to the homepage on a successful signin. Our app won't actually have a homepage. The budget is tight and it was deemed unnecessary for the launch.
+**⚠️ As of now, you are on your own for the CSS of any added functionality.**
+
+#### 4.1
 
 ---
 
