@@ -22,7 +22,9 @@ There is a file `/data/users.js` that contains an array of `user`s. Each user lo
 },
 ```
 
----
+> ### About the CSS
+>
+> The project is coming to you entirely styled! Let me repeat that: **All of the CSS is done for you.** 😱 I know, right! But because nothing is free, you will have to figure out the classes that go with each element. You are able to achieve the same look by placing assigning the css classes to the right element.
 
 ## The Workshop
 
@@ -160,20 +162,9 @@ Notice the temporary insertion of the `user.name` into the ejs template. You can
 
 Add the user's data to that object. You will need to figure out which user data to send based on the provided `_id` in the url params.
 
-```js
-res.status(200).res.render('pages/profile/', { user: 🤔 });
-```
-
 #### 2.3 Render all of the user's data to the page.
 
 - Render the user's avatar, and name.
-
-```html
-<div>
-  <img src="<%= 🤔 %>" alt="<% user.name %>" />
-  <h2><%= user.name %></h2>
-</div>
-```
 
 - 💎 Render the list of friends.
 
@@ -181,9 +172,8 @@ res.status(200).res.render('pages/profile/', { user: 🤔 });
 <div>
   <h3><%= user.name %>'s Friends</h3>
   <ul>
-    <!-- use .forEach to loop over the array of friends -->
+    <!-- loop over the array of friends -->
     <!-- each friend's image and name should be visible. -->
-    <!-- User's image should link to their profile page. -->
   </ul>
 </div>
 ```
@@ -192,15 +182,7 @@ res.status(200).res.render('pages/profile/', { user: 🤔 });
 
 Below is what the profile page should look like. While it doesn't need to be pixel-perfect, it should be close enough as to _not_ look different from the images below. I've provided the mobile version as well.
 
-A good breakpoint for the mobile to desktop in this case is `600px`.
-
-<div style="display:flex;">
-  <img style="max-width:25%;margin-right:12px;"src="./__lecture/assets/profile_2.png" />
-  <img src="./__lecture/assets/profile_3.png" />
-</div>
-
-1. The banner should be a background image and not an HTML element.
-2. The user's name is an `h2`.
+<img src="./__lecture/assets/profile_3.png" />
 
 ---
 
@@ -212,45 +194,7 @@ For this workshop, we're going to simply ask for the user's first name and if it
 
 #### 3.1 Create the endpoint
 
-In `server.js` we need to have an endpoint that will receive requests for the signin page. This endpoint will call a function called `handleSignin`.
-
-Here is the server file. Add the `/signin` endpoint and `handleSignin` function.
-
-```diff
-  'use strict';
-
-  const express = require('express');
-  const morgan = require('morgan');
-
-  const { users } = require('./data/users');
-
-  // declare the 404 function
-  const handleFourOhFour = (req, res) => {
-    res.status(404).send("I couldn't find what you're looking for.");
-  };
-
-+ const handleSignin = (req, res) => {
-+   res.status(200).send('ok');
-+ };
-
-  // -----------------------------------------------------
-  // server endpoints
-  express()
-    .use(morgan('dev'))
-    .use(express.static('public'))
-    .use(express.urlencoded({ extended: false }))
-    .set('view engine', 'ejs')
-
-    // endpoints
-+  .get('/signin', handleSignin)
-
-    // a catchall endpoint that will send the 404 message.
-    .get('*', handleFourOhFour)
-
-    .listen(8000, () => console.log('Listening on port 8000'));
-```
-
-This will allow us to "see" what is on the signin page... Nothing.
+In `server.js` we need to have an endpoint that will receive requests for the signin page. This endpoint will call a function called `handleSignin`. For testing purposes, do a `res.send('ok')` in that function. This will allow us to confirm that the signin endpoint works.
 
 <img src="./__lecture/assets/signin_1.png" />
 
@@ -260,16 +204,11 @@ In `views/pages`, create a new file called `signin.ejs`. Add the following `ejs`
 
 ```html
 <%- include('../partials/header') %>
-<div class="signin-page">
-  <form method="get" action="/getname" class="signin-page__form">
-    <label for="firstName" class="signin-page__form--label">First name</label>
-    <input
-      type="text"
-      name="firstName"
-      placeholder="Your first name"
-      class="signin-page__form--input"
-    />
-    <button type="submit" class="signin-page__form--button">Submit</button>
+<div>
+  <form method="get" action="/getname">
+    <label for="firstName">First name</label>
+    <input type="text" name="firstName" placeholder="Your first name" />
+    <button type="submit">Submit</button>
   </form>
 </div>
 <%- include('../partials/footer') %>
@@ -278,13 +217,6 @@ In `views/pages`, create a new file called `signin.ejs`. Add the following `ejs`
 #### 3.3 Render the signin page.
 
 The form we've just added doesn't yet render on the `/signin` page. We need to tell `handleSign` to render that particular `ejs` page template.
-
-```diff
-  const handleSignin = (req, res) => {
--   res.status(200).send('ok');
-+   res.status(200).render('pages/signin');
-  };
-```
 
 <img src="./__lecture/assets/signin_2.png" />
 
@@ -298,17 +230,11 @@ Notice that the form (in `signin.ejs`) has `action` attribute. That is the endpo
 .get('/getname', handleName)
 ```
 
-Notice that the endpoint is calling a new function. We need to define that function above. _You can define it right after the `handleSignin` function._
-
-```js
-const handleName = (req, res) => {};
-```
-
 This type of HTML form sends the data from the form as query parameters in the `req`uest.
 
 1. Define a variable `firstName` and assign the value of `req.query.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
 2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`).
-3. If it exists assign it to the `currentUser` variable that is defined on line 8, and then redirect to the homepage.
+3. If it exists assign it to the `currentUser` variable that is defined on line 8. _This will be where we track the currentuser of the app_ and then redirect to the homepage.
 4. If it doesn't exist, redirect to the signin page.
 
 We can redirect the browser to an endpoint with the following code.
@@ -330,12 +256,22 @@ It is good practice to chain our status and our render like so:
 res.status(404).render('/signin');
 ```
 
-We'll come back to the signin functionality after we create the profile page.
+---
+
+<center>🟡 - Minimally complete workshop (75%) - 🟡</center>
 
 ---
 
-#### x.x Redirect to the user's profile page
+### Exercise 4 Tying all of the pages together.
 
 Rather than redirect to the homepage, like so: `res.status(200).redirect('/');`. Let's write a dynamic endpoint that grabs the user's `_id` and puts it in the endpoint. This endpoint should match the endpoint you just created in 2.1.
 
 At this point, we have a working signin page that will redirect to the homepage on a successful signin. Our app won't actually have a homepage. The budget is tight and it was deemed unnecessary for the launch.
+
+---
+
+<center>🟢 - Complete workshop (100%) - 🟢</center>
+
+---
+
+### Stretch Goals
