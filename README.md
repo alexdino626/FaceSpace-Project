@@ -24,7 +24,7 @@ There is a file `/data/users.js` that contains an array of `user`s. Each user lo
 
 > ### About the CSS
 >
-> The project is coming to you entirely styled! Let me repeat that: **All of the CSS is done for you.** 😱 I know, right! But because nothing is free, you will have to figure out the classes that go with each element. You are able to achieve the same look by placing assigning the css classes to the right element.
+> The project is coming to you entirely styled! Let me repeat that: **All of the CSS is done for you.** 😱 I know, right! But because nothing is free, you will have to figure out the classes that go with each element. You are able to achieve the same look by assigning the css classes to the right element.
 
 ## The Workshop
 
