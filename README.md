@@ -291,13 +291,13 @@ While you're in the header, it would be good to turn the title into a link to th
 
 <img src="./__lecture/assets/home-links.gif" />
 
-### 4.3 My Friends!
+#### 4.3 My Friends!
 
 When a user is signed in and looking at the homepage, it would be great if there were some visual indication as to who their friends are in the grid of faces. My example is a ribbon on the image, but feel free to do whatever you like.
 
 <img src="./__lecture/assets/homepage_4.png" />
 
-### 4.4 No Signin for you!
+#### 4.4 No Sign in for you!
 
 If someone is already signed in, they should not be able to see the signin page. Currently, if a user signs in and navigates to http://localhost:8000/signin, they will see the sign in page.
 
@@ -310,3 +310,10 @@ Prevent this from happening.
 ---
 
 ### Stretch Goals
+
+Here are some other features that you could add to the app. _None of these have any solutions._
+
+1. User can add/remove friends. _This should update the friends array of both users. Being friends is reciprocal._
+2. If a user adds a friend, they are not automatically added. The other user needs to accept this first. _It would be useful to create a new array of `pendingFriends` in the user object._
+3. A sign up page... that does exactly what you would expect.
+4. What else can you think of?
