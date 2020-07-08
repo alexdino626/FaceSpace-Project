@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
 
 h1,
+h1 a,
 h2,
 h3,
 h4 {
@@ -10,9 +11,12 @@ h4 {
   line-height: 1em;
 }
 
-h1 {
+h1,
+h1 a {
+  color: #fff;
   font-size: 36px;
   margin-top: 3px;
+  text-decoration: none;
 }
 
 h2 {

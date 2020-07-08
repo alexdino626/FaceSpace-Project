@@ -3,7 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const { users } = require('./data/users');
+const { users } = require('../data/users');
 
 let currentUser = {};
 
@@ -35,8 +35,7 @@ const handleSignin = (req, res) => {
 };
 
 const handleName = (req, res) => {
-  const name = req.query.firstName;
-  const user = findUser(name);
+  const user = findUser(req.body.firstName);
 
   if (user) {
     currentUser = user;
@@ -68,7 +67,7 @@ express()
   // endpoints
   .get('/', handleHomepage)
   .get('/signin', handleSignin)
-  .get('/getname', handleName)
+  .post('/getname', handleName)
   .get('/users/:_id', handleProfilePage)
 
   // a catchall endpoint that will send the 404 message.

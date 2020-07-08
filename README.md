@@ -2,7 +2,7 @@
 
 ## Goal
 
-To create a site that will serve up Facespace! Oh, and learn a little more about Node, routing, EJS, and CSS along the way.
+Create a site that will serve up Facespace! Oh, and learn a little more about Node, routing, EJS, and CSS along the way.
 
 ## Setup
 
@@ -34,40 +34,16 @@ The homepage should show a grid of all of the users in the system.
 
 #### 1.1 Create the homepage endpoint
 
-Create a `GET` endpoint for the homepage. Update your server.js file to match this.
+- Create a `GET` endpoint for the homepage.
 
-```diff
-  'use strict';
+```js
+.get('/', handleHomepage)
+```
 
-  const express = require('express');
-  const morgan = require('morgan');
+- Declare the `handleHomepage` function, and send this `res`ponse:
 
-  const { users } = require('./data/users');
-
-  // declare the 404 function
-  const handleFourOhFour = (req, res) => {
-    res.status(404).send("I couldn't find what you're looking for.");
-  };
-
-+ const handleHomepage = (req, res) => {
-+   res.status(200).send('homepage');
-+ };
-
-  // -----------------------------------------------------
-  // server endpoints
-  express()
-    .use(morgan('dev'))
-    .use(express.static('public'))
-    .use(express.urlencoded({ extended: false }))
-    .set('view engine', 'ejs')
-
-    // endpoints
-+  .get('/', handleHomepage)
-
-    // a catchall endpoint that will send the 404 message.
-    .get('*', handleFourOhFour)
-
-    .listen(8000, () => console.log('Listening on port 8000'));
+```js
+res.status(200).send('homepage');
 ```
 
 Once you've added this right code, load the homepage at [http://localhost:8000](http://localhost:8000). You should see this.
@@ -77,28 +53,13 @@ Once you've added this right code, load the homepage at [http://localhost:8000](
 #### 1.2 Create the `homepage.ejs` template
 
 - In `views/pages/` there is a file called `homepage.ejs`
-- Add this code to that file.
-
-```html
-<!-- note that all of our page templates will include a header and footer partial -->
-<%- include('../partials/header') %>
-<div class="home-page">
-  <h2>All Facespace members</h2>
-  <!-- content here -->
-</div>
-<%- include('../partials/footer') %>
-```
+- There are partials for the header and footer. Add those to `homepage.ejs`.
+- Create a `div` with a class of `home-page`
+- Create an `h2` with content "All Facespace members"
 
 #### 1.3 Render the homepage
 
-To render the homepage, you will need to modify the `handleHomepage` function. Instead of `send`ing something. Let's render the `homepage.ejs` file that we just created.
-
-```diff
-  const handleHomepage = (req, res) => {
--   res.status(200).send('homepage');
-+   res.status(200).render('pages/homepage');
-  };
-```
+To render the homepage, you will need to modify the `handleHomepage` function. Instead of `send`ing something, `render` the `homepage.ejs` file that you just updated.
 
 You should now see this in the browser:
 
@@ -132,7 +93,7 @@ You should now see this in the browser:
 
 ### Exercise 2 - The Profile Page
 
-Let's create a profile page that will be unique to each user. Our endpoint should contain the user's `_id`, which will allow us to "know" which data to use.
+Create a profile page that will be unique to each user. Our endpoint should contain the user's `_id` as a `url param`, which will allow us to "know" which data to use.
 
 #### 2.1 Create a users endpoint
 
@@ -165,8 +126,7 @@ Add the user's data to that object. You will need to figure out which user data 
 #### 2.3 Render all of the user's data to the page.
 
 - Render the user's avatar, and name.
-
-- 💎 Render the list of friends.
+- Render the list of friends.
 
 ```html
 <div>
@@ -180,7 +140,7 @@ Add the user's data to that object. You will need to figure out which user data 
 
 #### 2.4 Create the HTML and CSS for the Profile page
 
-Below is what the profile page should look like. While it doesn't need to be pixel-perfect, it should be close enough as to _not_ look different from the images below. I've provided the mobile version as well.
+Below is what the profile page should look like. While it doesn't need to be pixel-perfect, it should be close enough as to _not_ look different from the images below. I've provided the mobile version as well. Look at [`public/css/profile-page.css`](public/css/profile-page.css) Add the right classes to the right elements.
 
 <img src="./__lecture/assets/profile_3.png" />
 
@@ -204,11 +164,16 @@ In `views/pages`, create a new file called `signin.ejs`. Add the following `ejs`
 
 ```html
 <%- include('../partials/header') %>
-<div>
-  <form method="get" action="/getname">
-    <label for="firstName">First name</label>
-    <input type="text" name="firstName" placeholder="Your first name" />
-    <button type="submit">Submit</button>
+<div class="signin-page">
+  <form method="post" action="/getname" class="signin-page__form">
+    <label for="firstName" class="signin-page__form--label">First name</label>
+    <input
+      type="text"
+      name="firstName"
+      placeholder="Your first name"
+      class="signin-page__form--input"
+    />
+    <button type="submit" class="signin-page__form--button">Submit</button>
   </form>
 </div>
 <%- include('../partials/footer') %>
@@ -216,7 +181,7 @@ In `views/pages`, create a new file called `signin.ejs`. Add the following `ejs`
 
 #### 3.3 Render the signin page.
 
-The form we've just added doesn't yet render on the `/signin` page. We need to tell `handleSign` to render that particular `ejs` page template.
+The form we've just added doesn't yet render on the `/signin` page. We need to tell `handleSignin` to render that particular `ejs` page template.
 
 <img src="./__lecture/assets/signin_2.png" />
 
@@ -224,15 +189,16 @@ The form we've just added doesn't yet render on the `/signin` page. We need to t
 
 Our form looks good but it doesn't yet do anything. We need the form to send the input to the server.
 
-Notice that the form (in `signin.ejs`) has `action` attribute. That is the endpoint that the form will contact when a user submits the form. Let's create a `GET` endpoint that will receive the data from the form.
+Notice that the form (in `signin.ejs`) has an `action` attribute. That is the endpoint that the form will contact when a user submits the form. Let's create a `POST` endpoint that will receive the data from the form.
 
 ```js
-.get('/getname', handleName)
+.post('/getname', handleName)
 ```
 
-This type of HTML form sends the data from the form as query parameters in the `req`uest.
+1. Define a variable `firstName` and assign the value of `req.body.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
 
-1. Define a variable `firstName` and assign the value of `req.query.firstName`. You can also write a temporary `console.log()` to make sure that your function works and that you have access to the value of `firstName`.
+_Note: You will see `[Object: null prototype]` in the console, if you `console.log(req.body)`. This isn't an error. It is by design, but beyond the scope of the lesson. [More information here](https://stackoverflow.com/questions/56298481/how-to-fix-object-null-prototype-title-product)._
+
 2. Use the `firstName` to `find()` that user's data in `users.js`. That array is already imported and available to you. (See line 6 of `server.js`).
 3. If it exists redirect to that user's profile page.
 4. If it doesn't exist, redirect to the signin page. (This is a reload of the signin page.)
@@ -243,17 +209,11 @@ We can redirect the browser to an endpoint with the following code.
 res.redirect('/the-endpoint');
 ```
 
-5. You should also return a status code to the browser.
+5. You should also return a status code to the browser. Chain them as we did in previous workshops.
 
 ```js
 res.status(200); // when the request is successful
 res.status(404); // when the request is not successful. In this case, the user was not found.
-```
-
-It is good practice to chain our status and our render like so:
-
-```js
-res.status(404).render('/signin');
 ```
 
 ---
@@ -265,8 +225,6 @@ res.status(404).render('/signin');
 ### Exercise 4 Tying all of the pages together.
 
 We now have a functioning app! 🙌 Let's add more functionality to the make it better.
-
-**⚠️ As of now, you are on your own for the CSS of any added functionality.**
 
 #### 4.1 - A link to the signin page in the header
 
@@ -313,7 +271,8 @@ Prevent this from happening.
 
 Here are some other features that you could add to the app. _None of these have any solutions._
 
-1. User can add/remove friends. _This should update the friends array of both users. Being friends is reciprocal._
-2. If a user adds a friend, they are not automatically added. The other user needs to accept this first. _It would be useful to create a new array of `pendingFriends` in the user object._
-3. A sign up page... that does exactly what you would expect.
-4. What else can you think of?
+- User can add/remove friends. _This should update the friends array of both users. Being friends is reciprocal._
+- If a user adds a friend, they are not automatically added. The other user needs to accept this first. _It would be useful to create a new array of `pendingFriends` in the user object._
+- A sign up page... that does exactly what you would expect.
+- Don't like the orange theme, change it. Flex your CSS muscles!!
+- What else can you think of?
