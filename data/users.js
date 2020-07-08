@@ -26,13 +26,13 @@ const users = [
   {
     _id: '1013',
     name: 'Lana',
-    friends: ['1011', '1012', '1010'],
+    friends: ['1014', '1018', '1023'],
     avatarUrl: '/images/profile-pics/000005.jpg',
   },
   {
     _id: '1014',
     name: 'Leona',
-    friends: ['1015', '1016', '1017'],
+    friends: ['1013', '1015', '1016', '1017'],
     avatarUrl: '/images/profile-pics/000006.jpg',
   },
   {
@@ -56,7 +56,7 @@ const users = [
   {
     _id: '1018',
     name: 'Paolo',
-    friends: ['1019', '1020', '1021'],
+    friends: ['1013', '1019', '1020', '1021'],
     avatarUrl: '/images/profile-pics/000014.jpg',
   },
   {
@@ -86,7 +86,7 @@ const users = [
   {
     _id: '1023',
     name: 'Abby',
-    friends: ['1022', '1024', '1025'],
+    friends: ['1013', '1022', '1024', '1025'],
     avatarUrl: '/images/profile-pics/000021.jpg',
   },
   {
