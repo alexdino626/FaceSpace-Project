@@ -1,4 +1,4 @@
-# Facespace!
+# 5-4 - Mini-Project: Facespace!
 
 ## Goal
 
@@ -13,7 +13,7 @@ Generally speaking, the frontend will query the backend via calls to the server 
 ### File Structure
 
 ```
-├── __lecture
+├── _screenshots
 ├── backend
     ├── node_modules (where all external dependencies are saved)
     |   ├── ...
@@ -66,25 +66,25 @@ There is a file `/data/users.js` that contains an array of `user`s. Each user lo
 
 ### Homepage
 
-<img src="./__lecture/assets/homepage_3.png" />
+<img src="./_screenshots/homepage_3.png" />
 
 ### The Profile Page
 
-<img src="./__lecture/assets/profile_3.png" />
+<img src="./_screenshots/profile_3.png" />
 
 ### The Sign in page
 
-<img src="./__lecture/assets/signin_2.png" />
+<img src="./_screenshots/signin_2.png" />
 
 ### A link to the signin page in the header
 
 We should have a link to the signin page in the header.
 
-<img src="./__lecture/assets/signin_button.png" />
+<img src="./_screenshots/signin_button.png" />
 
 When the user is signed in, the "sign in" link should be replaced by a greeting and the user's name.
 
-<img src="./__lecture/assets/signin_signedin.png" />
+<img src="./_screenshots/signin_signedin.png" />
 
 While you're in the header, it would be good to turn the title into a link to the homepage.
 
@@ -93,13 +93,13 @@ While you're in the header, it would be good to turn the title into a link to th
 - Faces on the homepage should link to that person's profile page.
 - Let's also add a little UX tweak on hover. Give the image some sort of effect on hover.
 
-<img src="./__lecture/assets/home-links.gif" />
+<img src="./_screenshots/home-links.gif" />
 
 ### My Friends!
 
 When a user is signed in and looking at the homepage, it would be great if there were some visual indication as to who their friends are in the grid of faces. My example is a ribbon on the image, but feel free to do whatever you like.
 
-<img src="./__lecture/assets/homepage_4.png" />
+<img src="./_screenshots/homepage_4.png" />
 
 ### No Sign in for you!
 
