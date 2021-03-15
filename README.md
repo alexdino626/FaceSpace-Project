@@ -104,6 +104,18 @@ h1 {
 }
 ```
 
+## The Frontend
+
+The entire build of the FE is up to you. Take a look at the provided live site to get an idea of the interactions and how they should work.
+
+You can also use the live site to check out the CSS. Now that could save some guesswork...
+
+### AppContext
+
+You should make use of context in this project. Your `AppContext.js` file might look like this.
+
+_NOTE: Screenshots may look different than the live site. The live site is the most up-to-date, but feel free to choose whichever design you like better._
+
 ## Screenshots
 
 ### Homepage
@@ -151,6 +163,7 @@ If someone is already signed in, they should not be able to see the signin page.
 
 Here are some other features that you could add to the app. _None of these have any solutions._
 
+- Users can sign out
 - User can add/remove friends. _This should update the friends array of both users. Being friends is reciprocal._
 - If a user adds a friend, they are not automatically added. The other user needs to accept this first. _It would be useful to create a new array of `pendingFriends` in the user object._
 - A sign up page... that does exactly what you would expect.
