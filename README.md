@@ -110,10 +110,6 @@ The entire build of the FE is up to you. Take a look at the provided live site t
 
 You can also use the live site to check out the CSS. Now that could save some guesswork...
 
-### AppContext
-
-You should make use of context in this project. Your `AppContext.js` file might look like this.
-
 _NOTE: Screenshots may look different than the live site. The live site is the most up-to-date, but feel free to choose whichever design you like better._
 
 ## Screenshots
