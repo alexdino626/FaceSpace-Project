@@ -54,7 +54,7 @@ const deleteUser = (req, res) => {
 
 // PATCH. requires the ids of 2 people to make them friends
 // ids should be sent along as an array called newFriends in the body
-const handleMakeFriends = (req, res) => {
+const handleFriends = (req, res) => {
   const [userId_1, userId_2] = req.body.newFriends;
   const user_1 = findUser(res.locals.users, userId_1);
   const user_2 = findUser(res.locals.users, userId_2);
@@ -68,23 +68,43 @@ const handleMakeFriends = (req, res) => {
       "One or both of the users not found."
     );
 
-  // if users are already friends, stop and return error
-  if (user_1.friends.includes(userId_2) || user_2.friends.includes(userId_1))
-    return sendResponse(res, 400, req.body, "Users are already friends.");
-
   const userIdx_1 = findUserIndex(res.locals.users, userId_1);
   const userIdx_2 = findUserIndex(res.locals.users, userId_2);
+
+  // if users are already friends, make them NOT friends
+  if (user_1.friends.includes(userId_2) || user_2.friends.includes(userId_1)) {
+    res.locals.users[userIdx_1].friends.splice(
+      user_1.friends.indexOf(userId_2),
+      1
+    );
+    res.locals.users[userIdx_2].friends.splice(
+      user_2.friends.indexOf(userId_1),
+      1
+    );
+
+    return sendResponse(
+      res,
+      200,
+      [user_1.friends, user_2.friends],
+      "Users are no longer friends."
+    );
+  }
 
   res.locals.users[userIdx_1].friends.push(userId_2);
   res.locals.users[userIdx_2].friends.push(userId_1);
 
-  sendResponse(res, 200, null, "users are now friends");
+  sendResponse(
+    res,
+    200,
+    [user_1.friends, user_2.friends],
+    "users are now friends"
+  );
 };
 
 module.exports = {
   deleteUser,
   getUsers,
   getUserById,
-  handleMakeFriends,
+  handleFriends,
   updateUser,
 };

@@ -2,36 +2,13 @@
 
 ## Goal
 
-Create a site that will serve up Facespace! Oh, and learn a little more about Node, routing, React and CSS along the way.
+Create a site that will serve up Facespace! Oh, and learn a little more about React, routing, Node and CSS along the way.
 
 ## Setup
 
-This repository contains a frontend and a backend folder. This means that each folder is contains a complete environment (`package.json`, `/node_modules`) and are completely independent. You cannot reference code from one environment in the other environment.
+This repository contains a frontend and a backend folder. This means that each folder is a complete environment (`package.json`, `/node_modules`). They are completely independent. You cannot reference code from one environment in the other environment.
 
 Generally speaking, the frontend will query the backend via calls to the server endpoints.
-
-### File Structure
-
-```
-├── _screenshots
-├── backend
-    ├── node_modules (where all external dependencies are saved)
-    |   ├── ...
-    |   └── ...
-    ├── server.js
-    └── yarn.lock ("locks" the dependency versions)
-├── frontend
-    ├── public
-    ├── src
-    ├── node_modules (where all external dependencies are saved)
-    |   ├── ...
-    |   └── ...
-    ├── package.json (where we keep a record of the app setup)
-    └── yarn.lock ("locks" the dependency versions)
-├── .gitignore
-├── .prettierrc
-└── README.md (this file)
-```
 
 ### The Frontend
 
@@ -49,9 +26,37 @@ Use `yarn dev:frontend` to start the frontend dev environment.
 
 Use `yarn dev:backend` to start the backend dev environment.
 
+## File Structure
+
+```
+├── _screenshots
+├── backend
+    ├── data
+    |   └── users.js (where our data is stored)
+    ├── node_modules (where all external dependencies are saved)
+    |   ├── ...
+    |   └── ...
+    ├── handlers.js (functions that are called by the endpoints)
+    ├── package.json (where we keep a record of the app setup)
+    ├── server.js
+    ├── utils.js (utility functions used by the BE)
+    └── yarn.lock ("locks" the dependency versions)
+├── frontend
+    ├── public
+    ├── src
+    ├── node_modules (where all external dependencies are saved)
+    |   ├── ...
+    |   └── ...
+    ├── package.json (where we keep a record of the app setup)
+    └── yarn.lock ("locks" the dependency versions)
+├── .gitignore
+├── .prettierrc
+└── README.md (this file)
+```
+
 ## About the Data
 
-There is a file `/data/users.js` that contains an array of `user`s. Each user looks like this.
+There is a file `backend/data/users.js` that contains an array of `user`s. Each user looks like this.
 
 ```js
 {
@@ -60,6 +65,43 @@ There is a file `/data/users.js` that contains an array of `user`s. Each user lo
   friends: ['1006', '1007', '1009'], // array of the ids of user's friends
   avatarUrl: '/images/profile-pics/000003.jpg',
 },
+```
+
+---
+
+## The Project
+
+This is described as a _mini_-project because it does not come with all of the guidance and step-by-step help that is usually provided in a workshop.
+
+We do provide you with a lot of stuff from the start but it will require becoming familiar with the code.
+
+### The Backend (server)
+
+The server is done. It is functional and will reliably provide your FE with the `req`uested data as long as the the requests are made in a way that the server expects.
+
+For more information on querying the server and what responses from the server will look like, read the [API_doc](backend/API_doc.md).
+
+## The Design
+
+The design is provided in the screenshots below and the theme colors and basic variables are added as CSS variables in `frontend/src/components/GlobalStyles.js`
+
+```css
+:root {
+  --primary-color: #cc5500;
+  --accent-bg-color: rgba(204, 85, 0, 0.1);
+  --page-horizontal-padding: 20px;
+  --header-height: 50px;
+  --max-content-width: 1200px;
+  --heading-font-family: "Teko", sans-serif;
+}
+```
+
+You can use these variables in any of your styled-components by calling `var()` and passing it the name of the variable, like so:
+
+```css
+h1 {
+  color: var(--primary-color);
+}
 ```
 
 ## Screenshots
