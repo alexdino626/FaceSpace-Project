@@ -1,28 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 
+export const breakpoints = { tablet: "600px" };
+
 export default createGlobalStyle`
-    *,
-    *:before,
-    *:after {
-        box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
+    :root {
+      --primary-color: #cc5500;
+      --accent-bg-color: rgba(204, 85, 0, 0.1);
+      --page-horizontal-padding: 20px;
+      --header-height: 50px;
+      --max-content-width: 1200px;
+      --heading-font-family: 'Teko', sans-serif;
+      --user-img-width: 120px;
     }
-
-    html, body, div,
-    input, button, select, option,
-    h1, h2, h3, h4, h5, h6, p,
-    text {
-        font-family: sans-serif;
-    }
-
-    html, body {
-        max-width: 100vw;
-    }
-
-    /* http://meyerweb.com/eric/tools/css/reset/
-        v2.0 | 20110126
-        License: none (public domain)
-    */
 
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -42,6 +31,7 @@ export default createGlobalStyle`
         border: 0;
         font-size: 100%;
         vertical-align: baseline;
+        box-sizing: border-box;
     }
     /* HTML5 display-role reset for older browsers */
     article, aside, details, figcaption, figure,
@@ -61,5 +51,12 @@ export default createGlobalStyle`
     q:before, q:after {
         content: '';
         content: none;
+    }
+    h1, h2, h3 {
+      color: var(--primary-color);
+      font-family: var(--heading-font-family);
+    }
+    h2 {
+      font-size: 28px;
     }
 `;
