@@ -19,16 +19,16 @@ const getUserById = (req, res) => {
 // PUT needs the user :id and the complete user object.
 const updateUser = (req, res) => {
   const updatedUser = req.body;
-  const { _id, name, friends, avatarUrl } = updatedUser;
+  const { id, name, friends, avatarUrl } = updatedUser;
 
-  const user = findUser(res.locals.users, updatedUser._id);
+  const user = findUser(res.locals.users, updatedUser.id);
 
   // if user is not found, stop and return 404
   if (!user) return sendResponse(res, 404, updatedUser, "user not found");
 
   // if provided user object doesn't include all name, or avatarUrl, or friends
   // PUT must include the complete user object
-  if ((!_id, !name || !avatarUrl || !friends))
+  if ((!id, !name || !avatarUrl || !friends))
     return sendResponse(
       res,
       400,
@@ -36,8 +36,8 @@ const updateUser = (req, res) => {
       "Bad Request: missing keys/values in user object"
     );
 
-  const index = findUserIndex(res.locals.users, _id);
-  res.locals.users[index] = { _id, name, friends, avatarUrl };
+  const index = findUserIndex(res.locals.users, id);
+  res.locals.users[index] = { id, name, friends, avatarUrl };
   sendResponse(res, 200, res.locals.users[index], "user updated.");
 };
 

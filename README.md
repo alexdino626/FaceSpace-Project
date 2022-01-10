@@ -60,7 +60,7 @@ There is a file `backend/data/users.js` that contains an array of `user`s. Each 
 
 ```js
 {
-  _id: '1008',
+  id: '1008',
   name: 'Fletcher',
   friends: ['1006', '1007', '1009'], // array of the ids of user's friends
   avatarUrl: '/images/profile-pics/000003.jpg',
