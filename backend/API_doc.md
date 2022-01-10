@@ -19,7 +19,7 @@ Once the server is running it will be able to `res`pond to `req`uests. The data 
 | `/api/users/:id` | DELETE | This endpoint deletes a user from `users` (not needed for the project)         |
 | `/api/friends`   | PATCH  | This endpoint accepts the `id`s of 2 people and will friend, or unfriend, them |
 
-In order to make 2 users friends, provide the following to the `/api/friends` endpoint in the `body`. The server will look at both users. If they are NOT already friends, it will add them from each other's friends array. \_If they are already friends , it will remove them from each other's array.
+In order to make 2 users friends, provide the following to the `/api/friends` endpoint in the `body`. The server will look at both users. If they are NOT already friends, it will add them from each other's friends array. If they are already friends , it will remove them from each other's array.
 
 ```js
 {
