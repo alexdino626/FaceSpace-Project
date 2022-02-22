@@ -1,4 +1,4 @@
-# 5-4 - Mini-Project: Facespace!
+# Mini-Project: Facespace!
 
 ## Goal
 
