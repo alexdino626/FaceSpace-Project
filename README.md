@@ -106,11 +106,7 @@ h1 {
 
 ## The Frontend
 
-The entire build of the FE is up to you. Take a look at the provided live site to get an idea of the interactions and how they should work.
-
-You can also use the live site to check out the CSS. Now that could save some guesswork...
-
-_NOTE: Screenshots may look different than the live site. The live site is the most up-to-date, but feel free to choose whichever design you like better._
+The entire build of the FE is up to you. 
 
 ## Screenshots
 
