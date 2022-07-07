@@ -71,13 +71,13 @@ There is a file `backend/data/users.js` that contains an array of `user`s. Each 
 
 ## The Project
 
-This is described as a _mini_-project because it does not come with all of the guidance and step-by-step help that is usually provided in a workshop.
+Even though this is a workshop, it is described as a _mini-project_ because it does not come with all of the guidance and step-by-step help that is usually provided in a workshop.
 
 We do provide you with a lot of stuff from the start but it will require becoming familiar with the code.
 
 ### The Backend (server)
 
-The server is done. It is functional and will reliably provide your FE with the `req`uested data as long as the the requests are made in a way that the server expects.
+The server is mostly done. It is functional and will reliably provide your FE with the `req`uested data as long as the the requests are made in a way that the server expects.
 
 For more information on querying the server and what responses from the server will look like, read the [API_doc](backend/API_doc.md).
 
@@ -122,6 +122,10 @@ The entire build of the FE is up to you.
 
 <img src="./_screenshots/signin_2.png" />
 
+> Wouldn't it be nice to have a way to validate who was signing in?
+
+> Wouldn't it also be nice for the website to redirect you to the home page when you've signed in?
+
 ### A link to the signin page in the header
 
 We should have a link to the signin page in the header.
@@ -151,9 +155,15 @@ When a user is signed in and looking at the homepage, it would be great if there
 
 If someone is already signed in, they should not be able to see the signin page. Prevent this from happening.
 
+> Hint: redirect the user to the home page if they are signed in.
+
+### Recommended strategy:
+
+Make use of `sessionStorage` as a signed in state for your user.
+
 ### Stretch Goals
 
-Here are some other features that you could add to the app. _None of these have any solutions._
+Here are some other features that you could add to the app.
 
 - Users can sign out
 - User can add/remove friends. _This should update the friends array of both users. Being friends is reciprocal._
