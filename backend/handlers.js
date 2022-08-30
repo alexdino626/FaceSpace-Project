@@ -16,6 +16,25 @@ const getUserById = (req, res) => {
     : sendResponse(res, 404, null, "user not found");
 };
 
+// POST for sign-in
+const handleSignIn = (req, res) => {
+  const { member } = req.body;
+  let signedUser = res.locals.users.find((user) => {
+    return user.name.toLowerCase() === member.toLowerCase();
+  });
+
+// console.log(signedUser);
+  if (signedUser) {
+      res.status(200).json({
+        status:"ok", data: signedUser
+      })
+  } else{
+    res.status(400).json({
+      status:"error", msg:"invalid user"
+    })
+  }
+};
+
 // PUT needs the user :id and the complete user object.
 const updateUser = (req, res) => {
   const updatedUser = req.body;

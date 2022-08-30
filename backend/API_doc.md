@@ -13,9 +13,12 @@ Once the server is running it will be able to `res`pond to `req`uests. The data 
 
 | Endpoint         | Method | Description                                                                    |
 | ---------------- | ------ | ------------------------------------------------------------------------------ |
-| `/api/users`     | GET    | This endpoint returns an array of all of the users                             |
-| `/api/users/:id` | GET    | This endpoint returns the user object based on provided `id`                   |
-| `/api/users/`    | PUT    | This enpoint accepts data in the `body` and updates the user                   |
+| `/api/users`     | GET    | This endpoint returns an array of all of the users   
+<!-- Homepage                         | -->
+| `/api/users/:id` | GET    | This endpoint returns the user object based on provided `id
+<!-- Profile`                   | -->
+| `/api/users/`    | PUT    | This enpoint accepts data in the `body` and updates the user
+<!-- Sign-in                   | -->
 | `/api/users/:id` | DELETE | This endpoint deletes a user from `users` (not needed for the project)         |
 | `/api/friends`   | PATCH  | This endpoint accepts the `id`s of 2 people and will friend, or unfriend, them |
 
