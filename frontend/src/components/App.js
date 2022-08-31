@@ -1,14 +1,14 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
-import { Homepage } from "./Home/Homepage";
-import { NavBar } from "./NavBar";
-import { SignIn } from "./Form/SignIn";
-import { ProfilePage } from "./Profile/ProfilePage"
+import  Homepage  from "./Home/Homepage";
+import  NavBar  from "./Navbar";
+import  SignIn  from "./Form/SignIn";
+import  ProfilePage  from "./Profile/ProfilePage"
 
 const App = () => {
   return (
     <BrowserRouter>
-    <NavBar />
+    <NavBar/>
       <GlobalStyles />
       <div>
         <Switch>

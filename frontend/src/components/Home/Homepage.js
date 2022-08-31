@@ -27,7 +27,7 @@ const Homepage = () => {
             )}
             {status && (
                 <ProfilesHere>
-                    {user.map((user)=> {
+                    {users.map((user)=> {
                         return (
                             <Profile key={user.id}>
                                 <UserHere to={`/users/${user.id}`}>

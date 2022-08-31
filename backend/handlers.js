@@ -126,4 +126,5 @@ module.exports = {
   getUserById,
   handleFriends,
   updateUser,
+  handleSignIn
 };

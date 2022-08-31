@@ -1,8 +1,8 @@
 import { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import  Friends  from "../Friends";
 
-import { Friends } from "./Friends";
 
 const Profile = () => {
     const { id } = useParams();
@@ -32,7 +32,7 @@ const Profile = () => {
                         allow="fullscreen"
                         frameBorder="0"
                         height="600"
-                        src="https://giphy.com/embed/6kJzm031RcUOaL18g8/video"
+                        src="https://giphy.com/embed/3ohzdTyox6pIqyCLgQ"
                         width="100%"
                         title="GIF"
                     />

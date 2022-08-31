@@ -6,7 +6,7 @@ const UserProvider = ({ children }) => {
     //big user list
     const [users, setUsers] = useState([]);
     const [userInfo, setUserInfo] = useState([]);
-}
+
 //fetch from server
 const fetchUsers = async () => {
     const response = await fetch("/api/users");
@@ -35,4 +35,5 @@ return (
             {children}
         </UserContext.Provider>
 )
+}
 export default UserProvider

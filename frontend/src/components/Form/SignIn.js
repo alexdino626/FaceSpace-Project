@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import { UserContext } from "../components/Profile/UserContext"
 import { useContext } from "react"
 import { useHistory } from "react-router-dom"
+import { UserContext } from "../Profile/UserContext";
 
 
 
@@ -83,7 +83,6 @@ const Wrapper = styled.div`
 `
 
 const SignInWrapper = styled.div`
-    background-image: url("https://media.giphy.com/media/UA2Qg3CqCV1hnbUNRs/giphy.gif?cid=ecf05e47ktu1hl16um4xvajrey7w50htar4den6jz3y9vc6f&rid=giphy.gif&ct=g");
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;

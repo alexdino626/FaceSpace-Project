@@ -17,7 +17,7 @@ const Navbar = () => {
                     <Logo to="/">
                         <LogoText>Facespace</LogoText>
                     </Logo>
-                    <Signin to="/signin">Sign-In</Signin>
+                    <SignIn to="/signin">Sign-In</SignIn>
                 </NavbarContainer>
             )}
             {status && (
