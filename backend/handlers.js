@@ -22,7 +22,7 @@ const handleSignIn = (req, res) => {
   let signedUser = res.locals.users.find((user) => {
     return user.name.toLowerCase() === member.toLowerCase();
   });
-
+  // console.log(user.name);
 // console.log(signedUser);
   if (signedUser) {
       res.status(200).json({

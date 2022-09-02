@@ -6,6 +6,7 @@ import { UserContext } from "../Profile/UserContext";
 
 
 
+
 const SignIn = () => {
     const {
         userName,
@@ -14,6 +15,7 @@ const SignIn = () => {
         setStatus,
         setUserInfo,
     } = useContext(UserContext);
+
 
     let history = useHistory();
 
@@ -41,7 +43,7 @@ const SignIn = () => {
                 setStatus(true)
                 setUserName(userName);
                 setUserInfo(data.data);
-                sessionStorage.setItem("member", JSON.stringify(data.data));
+                window.localStorage.setItem("member", JSON.stringify(data.data));
                 history.push("/");
             }
         })

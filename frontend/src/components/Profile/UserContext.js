@@ -15,12 +15,27 @@ const fetchUsers = async () => {
 };
 
 useEffect(() => {
-    fetchUsers().then((item) => setUsers(item.data));
+    fetchUsers().then((item) => {
+        setUsers(item.data)
+        // console.log(item.data);
+    })
+    
 }, []);
 
 //sign-in
 const [userName, setUserName] = useState("");
 const [status, setStatus] = useState(false);
+useEffect(()=>{
+    const signInUser = JSON.parse(window.localStorage.getItem("member"));
+    
+    if(signInUser){
+        setUserName(true);
+        setUserName(signInUser.name)
+    }
+},[])
+
+
+
 
 return (
     <UserContext.Provider value ={{ 

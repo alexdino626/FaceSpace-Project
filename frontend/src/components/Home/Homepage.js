@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../Profile/UserContext";
+import { useEffect } from "react";
 
 
 
 const Homepage = () => {
     const { users, status, userInfo } = useContext(UserContext);
+
 
     return (
     <>
