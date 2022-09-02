@@ -44,6 +44,7 @@ const SignIn = () => {
                 setUserName(userName);
                 setUserInfo(data.data);
                 window.localStorage.setItem("member", JSON.stringify(data.data));
+                // sessionStorage.setItem("member", JSON.stringify(data.data));
                 history.push("/");
             }
         })

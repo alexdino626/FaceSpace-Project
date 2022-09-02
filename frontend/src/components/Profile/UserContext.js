@@ -27,6 +27,8 @@ const [userName, setUserName] = useState("");
 const [status, setStatus] = useState(false);
 useEffect(()=>{
     const signInUser = JSON.parse(window.localStorage.getItem("member"));
+    // const signInUser = JSON.parse(sessionStorage.getItem("member"));
+
     
     if(signInUser){
         setUserName(true);
