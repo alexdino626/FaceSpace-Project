@@ -31,8 +31,9 @@ useEffect(()=>{
 
     
     if(signInUser){
-        setUserName(true);
+        setStatus(true);
         setUserName(signInUser.name)
+        setUserInfo(signInUser)
     }
 },[])
 
